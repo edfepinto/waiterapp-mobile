@@ -16,6 +16,11 @@ import { TableModal } from '../components/TableModal';
 
 export default function Main() {
   const [isTableModalVisible, setIsTableModalVisible] = React.useState(false);
+  const [selectedTable, setSelectedTable] = React.useState('');
+
+  function handleSaveTable(table: string){
+    setSelectedTable(table);
+  }
 
   return (
     <>
@@ -33,15 +38,18 @@ export default function Main() {
 
       <Footer>
         <FooterContainer>
-          <Button onPress={() => setIsTableModalVisible(true)}>
-            Novo pedido
-          </Button>
+          {!selectedTable && (
+            <Button onPress={() => setIsTableModalVisible(true)}>
+              Novo pedido
+            </Button>
+          )}
         </FooterContainer>
       </Footer>
 
       <TableModal
-        onClose={() => setIsTableModalVisible(false)}
         visible={isTableModalVisible}
+        onClose={() => setIsTableModalVisible(false)}
+        onSave={handleSaveTable}
       />
     </>
   );
