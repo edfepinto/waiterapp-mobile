@@ -1,3 +1,5 @@
+import * as React from 'react';
+
 import { Categories } from '../components/Categories';
 import { Header } from '../components/Header';
 import { Menu } from '../components/Menu';
@@ -10,8 +12,11 @@ import {
   Footer,
   FooterContainer
 } from './styles';
+import { TableModal } from '../components/TableModal';
 
 export default function Main() {
+  const [isTableModalVisible, setIsTableModalVisible] = React.useState(false);
+
   return (
     <>
       <Container>
@@ -28,11 +33,16 @@ export default function Main() {
 
       <Footer>
         <FooterContainer>
-          <Button onPress={() => alert('Novo pedido')}>
+          <Button onPress={() => setIsTableModalVisible(true)}>
             Novo pedido
           </Button>
         </FooterContainer>
       </Footer>
+
+      <TableModal
+        onClose={() => setIsTableModalVisible(false)}
+        visible={isTableModalVisible}
+      />
     </>
   );
 }
