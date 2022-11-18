@@ -1,38 +1,38 @@
-const products = [
+export const products = [
   {
-    _id: '6372e040f52e37ef85fe2c5e',
-    name: 'Pizza quatro queijos',
-    description: 'Deliciosa pizza quatro queijos com borda simples',
-    imagePath: '1668472896991-quatro-queijos.png',
-    price: 40,
+    _id: '63760f2e876b61c9888f2cc1',
+    name: 'Burguer Mega Chicken',
+    description: 'Um delicioso hambúrguer com um belo pedaço de peito de frango empanado!',
+    imagePath: '1668681518276-chicken.png',
+    price: 32,
     ingredients: [
+      {
+        name: 'Pão Brioche',
+        icon: '🍞',
+        _id: '63760f2e876b61c9888f2cc2'
+      },
+      {
+        name: 'Peito de frango empanado',
+        icon: '🍗',
+        _id: '63760f2e876b61c9888f2cc3'
+      },
       {
         name: 'Mussarela',
         icon: '🧀',
-        _id: '6372e040f52e37ef85fe2c5f'
+        _id: '63760f2e876b61c9888f2cc4'
       },
       {
-        name: 'Parmesão',
-        icon: '🧀',
-        _id: '6372e040f52e37ef85fe2c60'
-      },
-      {
-        name: 'Gouda',
-        icon: '🧀',
-        _id: '6372e040f52e37ef85fe2c61'
-      },
-      {
-        name: 'Brie',
-        icon: '🧀',
-        _id: '6372e040f52e37ef85fe2c62'
+        name: 'Alface e Tomate',
+        icon: '🥗',
+        _id: '63760f2e876b61c9888f2cc5'
       }
     ],
   },
   {
-    _id: '6372e276a381106c0f854cb3',
+    _id: '63760f76876b61c9888f2cce',
     name: 'Coca cola',
-    description: 'Coca cola lata geladinha topzera',
-    imagePath: '1668473462705-coca-cola.png',
+    description: 'Coca Cola Lata 350ml',
+    imagePath: '1668681590527-coca-cola.png',
     price: 7,
     ingredients: [],
   },
