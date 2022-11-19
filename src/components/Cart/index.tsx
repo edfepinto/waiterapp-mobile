@@ -1,6 +1,7 @@
 import { FlatList, TouchableOpacity } from 'react-native';
 
 import { CartItem } from '../../types/CartItem';
+import { Product } from '../../types/Product';
 import { formatCurrency } from '../../utils/formatCurrency';
 
 import { MinusCircle } from '../Icons/MinusCircle';
@@ -20,10 +21,16 @@ import {
 } from './styles';
 
 interface CartProps {
-  cartItems: CartItem[]
+  cartItems: CartItem[],
+  onAdd: (Product: Product) => void,
+  onDecrement: (Product: Product) => void
 }
 
-export function Cart({ cartItems }: CartProps) {
+export function Cart({ cartItems, onAdd, onDecrement }: CartProps) {
+  const total = cartItems.reduce((total, cartItem) => {
+    return total + cartItem.quantity * cartItem.product.price;
+  }, 0);
+
   return (
     <>
       {cartItems.length > 0 && (
@@ -65,11 +72,16 @@ export function Cart({ cartItems }: CartProps) {
               </ProductContainer>
 
               <Actions>
-                <TouchableOpacity style={{ marginRight: 24 }}>
+                <TouchableOpacity
+                  style={{ marginRight: 24 }}
+                  onPress={() => onDecrement(cartItem.product)}
+                >
                   <MinusCircle />
                 </TouchableOpacity>
 
-                <TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => onAdd(cartItem.product)}
+                >
                   <PlusCircle />
                 </TouchableOpacity>
               </Actions>
@@ -84,7 +96,7 @@ export function Cart({ cartItems }: CartProps) {
             <>
               <Text color='#666'>Total</Text>
               <Text size={20} weight="600">
-                {formatCurrency(64)}
+                {formatCurrency(total)}
               </Text>
             </>
           ) : (
