@@ -1,7 +1,7 @@
 import { FlatList, TouchableOpacity } from 'react-native';
 
 import { CartItem } from '../../types/CartItem';
-import { Product } from '../../types/Product';
+import { Product } from '../../types/product';
 import { formatCurrency } from '../../utils/formatCurrency';
 
 import { MinusCircle } from '../Icons/MinusCircle';
