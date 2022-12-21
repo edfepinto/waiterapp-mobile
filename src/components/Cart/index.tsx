@@ -9,6 +9,9 @@ import { MinusCircle } from '../Icons/MinusCircle';
 import { PlusCircle } from '../Icons/PlusCircle';
 import { Button } from '../Button';
 import { Text } from '../Text';
+import { OrderConfirmedModal } from '../OrderConfirmedModal';
+
+import { api } from '../../utils/api';
 
 import {
   Item,
@@ -20,29 +23,43 @@ import {
   Summary,
   TotalContainer
 } from './styles';
-import { OrderConfirmedModal } from '../OrderConfirmedModal';
 
 interface CartProps {
   cartItems: CartItem[],
   onAdd: (Product: Product) => void,
   onDecrement: (Product: Product) => void,
-  onConfirmOrder: () => void
+  onConfirmOrder: () => void,
+  selectedTable: string
 }
 
 export function Cart({
   cartItems,
   onAdd,
   onDecrement,
-  onConfirmOrder
+  onConfirmOrder,
+  selectedTable
 }: CartProps) {
-  const [isLoading] = React.useState(false);
+  const [isLoading, setIsLoading] = React.useState(false);
   const [isModalVisible, setIsModalVisible] = React.useState(false);
 
   const total = cartItems.reduce((total, cartItem) => {
     return total + cartItem.quantity * cartItem.product.price;
   }, 0);
 
-  function handleConfirmOrder() {
+  async function handleConfirmOrder() {
+    setIsLoading(true);
+
+    const payload = {
+      table: selectedTable,
+      products: cartItems.map((cartItem) => ({
+        product: cartItem.product._id,
+        quantity: cartItem.quantity
+      }))
+    };
+
+    await api.post('/orders', payload);
+
+    setIsLoading(false);
     setIsModalVisible(true);
   }
 
